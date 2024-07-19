@@ -7,7 +7,7 @@ Este proyecto es una landing page desarrollada en NextJS 14 que genera rutinas d
 ### Demo en vivo
 
 Puedes probar en vivo la app en:
-<a href="https://google.com" target="_blank">DEMO</a>
+<a href="https://vercelai.mydeploys.com" target="_blank">DEMO</a>
 
 ## Tecnologías Utilizadas
 

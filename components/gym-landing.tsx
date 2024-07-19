@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { JSX, SVGProps } from "react";
 import RutineWorkout from "./rutine-workout";
