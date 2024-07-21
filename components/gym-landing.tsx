@@ -2,17 +2,21 @@
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { JSX, SVGProps } from "react";
+import { JSX, SVGProps, useRef } from "react";
 import RutineWorkout from "./rutine-workout";
 import { experimental_useObject as useObject } from "ai/react";
 import { notificationSchema } from "../app/api/notifications/schema";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Gymlanding() {
 	let { object, submit, isLoading, stop } = useObject({
 		api: "/api/notifications",
 		schema: notificationSchema,
 	});
+
+	const gpt: any = useRef(null);
+	const home: any = useRef(null);
 
 	const [formData, setFormData] = useState({
 		days: "",
@@ -30,16 +34,28 @@ export default function Gymlanding() {
 	};
 
 	function setData() {
+		if (home.current) {
+			window.scrollTo({
+				top: home.current.offsetTop,
+				behavior: "instant",
+			});
+		}
 		window.location.reload();
 	}
 
 	function handleSubmit(e: any) {
 		e.preventDefault();
 		submit(formData);
+		if (gpt.current) {
+			window.scrollTo({
+				top: gpt.current.offsetTop,
+				behavior: "smooth",
+			});
+		}
 	}
 
 	return (
-		<div className="flex flex-col min-h-dvh">
+		<div id="home" ref={home} className="flex flex-col min-h-dvh">
 			<header className="px-4 lg:px-6 h-14 flex items-center">
 				<Link
 					href="#"
@@ -91,15 +107,21 @@ export default function Gymlanding() {
 								<p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
 									Rutinas de Ejercicio Personalizadas para Alcanzar tus Metas.
 								</p>
-								{/* <div className="space-x-4 mt-6">
-									<Link
+								<div className="space-x-4 mt-6">
+									<Image
+										src={"https://i.imgur.com/gCgteu4.png"}
+										alt="workout"
+										width={"1800"}
+										height={"1200"}
+									/>
+									{/* <Link
 										href="#"
 										className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
 										prefetch={false}
 									>
 										Join Now
-									</Link>
-								</div> */}
+									</Link> */}
+								</div>
 							</div>
 							<div className="bg-muted rounded-lg p-6 shadow-lg">
 								<h2 className="text-2xl font-bold mb-4 text-center">
@@ -182,14 +204,16 @@ export default function Gymlanding() {
 						</div>
 					</div>
 				</section>
-				{object && (
-					<section className="flex flex-col items-center justify-center space-y-4 mt-12">
-						<RutineWorkout data={object} />
-						<Button onClick={setData}>Reiniciar</Button>
-					</section>
-				)}
+				<div id="chatGPT" ref={gpt}>
+					{object && (
+						<section className="flex flex-col items-center justify-center space-y-4 mt-12">
+							<RutineWorkout data={object} />
+							<Button onClick={setData}>Reiniciar</Button>
+						</section>
+					)}
+				</div>
 				<section className="w-full py-12 md:py-24 lg:py-32">
-					<div className="container space-y-12 px-4 md:px-6">
+					<div className="space-y-12 px-4 md:px-6">
 						<div className="flex flex-col items-center justify-center space-y-4 text-center">
 							<div className="space-y-2">
 								<h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
