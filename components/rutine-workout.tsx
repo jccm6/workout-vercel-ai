@@ -1,34 +1,8 @@
 import { Card } from "@/components/ui/card";
 
 export default function RutineWorkout({ data }: any) {
-	// console.log("Dias", data?.workout?.dia);
-	// console.log("Rutina", data?.workout?.rutina);
-	// console.log(data?.key);
-
 	return (
 		<>
-			{/* {data?.workout?.map((work: any, index: any) => (
-				<div className="flex items-center justify-between">
-					<div key={index} className="font-medium">
-						{work.dia}
-					</div>
-					{work?.rutina?.map((e: any, index: any) => (
-						<p key={index} className="text-muted-foreground">
-							{e.pasos}
-						</p>
-					))}
-				</div>
-			))} */}
-
-			{/* {data?.workout?.map((work: any, index: any) => (
-				<div key={index}>
-					<p>{work.dia}</p>
-					{work?.rutina?.map((e: any, index: any) => (
-						<p key={index}>{e.pasos}</p>
-					))}
-				</div>
-			))} */}
-
 			<Card className="max-w-md p-6 grid gap-6">
 				<div className="flex items-center justify-between">
 					<h2 className="text-2xl font-semibold">Tu Rutina</h2>
